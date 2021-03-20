@@ -18,21 +18,20 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author USUARIO
+ * @author fabiancaicedocuellar
  */
 @Entity
 @Table(name = "Cliente")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Cliente.findAll", query = "SELECT c FROM Cliente c"),
-    @NamedQuery(name = "Cliente.findByIdCliente", query = "SELECT c FROM Cliente c WHERE c.idCliente = :idCliente"),
-    @NamedQuery(name = "Cliente.findByNombre", query = "SELECT c FROM Cliente c WHERE c.nombre = :nombre")})
+    @NamedQuery(name = "Cliente.findAll", query = "SELECT c FROM Cliente c")
+    , @NamedQuery(name = "Cliente.findByIdCliente", query = "SELECT c FROM Cliente c WHERE c.idCliente = :idCliente")
+    , @NamedQuery(name = "Cliente.findByNombre", query = "SELECT c FROM Cliente c WHERE c.nombre = :nombre")})
 public class Cliente implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -41,7 +40,6 @@ public class Cliente implements Serializable {
     @Basic(optional = false)
     @Column(name = "idCliente")
     private Integer idCliente;
-    @Size(max = 45)
     @Column(name = "Nombre")
     private String nombre;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cliente")
@@ -101,7 +99,7 @@ public class Cliente implements Serializable {
 
     @Override
     public String toString() {
-        return nombre;
+        return "entities.Cliente[ idCliente=" + idCliente + " ]";
     }
     
 }

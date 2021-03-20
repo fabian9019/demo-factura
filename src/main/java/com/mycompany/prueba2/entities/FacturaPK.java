@@ -9,11 +9,10 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.validation.constraints.NotNull;
 
 /**
  *
- * @author USUARIO
+ * @author fabiancaicedocuellar
  */
 @Embeddable
 public class FacturaPK implements Serializable {
@@ -22,7 +21,6 @@ public class FacturaPK implements Serializable {
     @Column(name = "idFactura")
     private int idFactura;
     @Basic(optional = false)
-    @NotNull
     @Column(name = "Cliente_idCliente")
     private int clienteidCliente;
 
@@ -76,7 +74,7 @@ public class FacturaPK implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mycompany.mavenproject2.entity.FacturaPK[ idFactura=" + idFactura + ", clienteidCliente=" + clienteidCliente + " ]";
+        return "entities.FacturaPK[ idFactura=" + idFactura + ", clienteidCliente=" + clienteidCliente + " ]";
     }
     
 }

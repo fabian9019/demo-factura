@@ -8,32 +8,32 @@ package com.mycompany.prueba2.entities;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author USUARIO
+ * @author fabiancaicedocuellar
  */
 @Entity
 @Table(name = "Producto")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Producto.findAll", query = "SELECT p FROM Producto p"),
-    @NamedQuery(name = "Producto.findByIdProducto", query = "SELECT p FROM Producto p WHERE p.idProducto = :idProducto"),
-    @NamedQuery(name = "Producto.findByDescripcion", query = "SELECT p FROM Producto p WHERE p.descripcion = :descripcion"),
-    @NamedQuery(name = "Producto.findByCantidad", query = "SELECT p FROM Producto p WHERE p.cantidad = :cantidad"),
-    @NamedQuery(name = "Producto.findByValor", query = "SELECT p FROM Producto p WHERE p.valor = :valor")})
+    @NamedQuery(name = "Producto.findAll", query = "SELECT p FROM Producto p")
+    , @NamedQuery(name = "Producto.findByIdProducto", query = "SELECT p FROM Producto p WHERE p.idProducto = :idProducto")
+    , @NamedQuery(name = "Producto.findByDescripcion", query = "SELECT p FROM Producto p WHERE p.descripcion = :descripcion")
+    , @NamedQuery(name = "Producto.findByCantidad", query = "SELECT p FROM Producto p WHERE p.cantidad = :cantidad")
+    , @NamedQuery(name = "Producto.findByValor", query = "SELECT p FROM Producto p WHERE p.valor = :valor")})
 public class Producto implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -42,7 +42,6 @@ public class Producto implements Serializable {
     @Basic(optional = false)
     @Column(name = "idProducto")
     private Integer idProducto;
-    @Size(max = 45)
     @Column(name = "Descripcion")
     private String descripcion;
     @Column(name = "Cantidad")
@@ -50,8 +49,8 @@ public class Producto implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "Valor")
     private Double valor;
-    @ManyToMany(mappedBy = "productoList")
-    private List<Factura> facturaList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "producto")
+    private List<FacturahasProducto> facturahasProductoList;
 
     public Producto() {
     }
@@ -93,12 +92,12 @@ public class Producto implements Serializable {
     }
 
     @XmlTransient
-    public List<Factura> getFacturaList() {
-        return facturaList;
+    public List<FacturahasProducto> getFacturahasProductoList() {
+        return facturahasProductoList;
     }
 
-    public void setFacturaList(List<Factura> facturaList) {
-        this.facturaList = facturaList;
+    public void setFacturahasProductoList(List<FacturahasProducto> facturahasProductoList) {
+        this.facturahasProductoList = facturahasProductoList;
     }
 
     @Override
@@ -123,7 +122,7 @@ public class Producto implements Serializable {
 
     @Override
     public String toString() {
-        return idProducto + " - " + descripcion;
+        return "entities.Producto[ idProducto=" + idProducto + " ]";
     }
-
+    
 }

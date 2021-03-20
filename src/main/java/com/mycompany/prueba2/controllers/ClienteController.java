@@ -1,8 +1,8 @@
 package com.mycompany.prueba2.controllers;
 
 import com.mycompany.prueba2.entities.Cliente;
-import com.mycompany.prueba2.utilities.JsfUtil;
-import com.mycompany.prueba2.utilities.JsfUtil.PersistAction;
+import controllers.util.JsfUtil;
+import controllers.util.JsfUtil.PersistAction;
 import com.mycompany.prueba2.daos.ClienteDao;
 
 import java.io.Serializable;
@@ -24,7 +24,7 @@ import javax.faces.convert.FacesConverter;
 public class ClienteController implements Serializable {
 
     @EJB
-    private ClienteDao ejbFacade;
+    private ClienteDao clienteDao;
     private List<Cliente> items = null;
     private Cliente selected;
 
@@ -45,8 +45,8 @@ public class ClienteController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
-    private ClienteDao getFacade() {
-        return ejbFacade;
+    private ClienteDao getDao() {
+        return clienteDao;
     }
 
     public Cliente prepareCreate() {
@@ -76,7 +76,7 @@ public class ClienteController implements Serializable {
 
     public List<Cliente> getItems() {
         if (items == null) {
-            items = getFacade().findAll();
+            items = getDao().findAll();
         }
         return items;
     }
@@ -86,9 +86,9 @@ public class ClienteController implements Serializable {
             setEmbeddableKeys();
             try {
                 if (persistAction != PersistAction.DELETE) {
-                    getFacade().edit(selected);
+                    getDao().edit(selected);
                 } else {
-                    getFacade().remove(selected);
+                    getDao().remove(selected);
                 }
                 JsfUtil.addSuccessMessage(successMessage);
             } catch (EJBException ex) {
@@ -110,15 +110,15 @@ public class ClienteController implements Serializable {
     }
 
     public Cliente getCliente(java.lang.Integer id) {
-        return getFacade().find(id);
+        return getDao().find(id);
     }
 
     public List<Cliente> getItemsAvailableSelectMany() {
-        return getFacade().findAll();
+        return getDao().findAll();
     }
 
     public List<Cliente> getItemsAvailableSelectOne() {
-        return getFacade().findAll();
+        return getDao().findAll();
     }
 
     @FacesConverter(forClass = Cliente.class)

@@ -12,13 +12,13 @@ public abstract class Factura_ {
 
 	public static volatile SingularAttribute<Factura, Cliente> cliente;
 	public static volatile SingularAttribute<Factura, FacturaPK> facturaPK;
-	public static volatile ListAttribute<Factura, Producto> productoList;
 	public static volatile SingularAttribute<Factura, Date> fechaCreacion;
+	public static volatile ListAttribute<Factura, FacturahasProducto> facturahasProductoList;
 
 	public static final String CLIENTE = "cliente";
 	public static final String FACTURA_PK = "facturaPK";
-	public static final String PRODUCTO_LIST = "productoList";
 	public static final String FECHA_CREACION = "fechaCreacion";
+	public static final String FACTURAHAS_PRODUCTO_LIST = "facturahasProductoList";
 
 }
 
