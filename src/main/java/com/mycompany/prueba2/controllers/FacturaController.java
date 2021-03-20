@@ -4,11 +4,7 @@ import com.mycompany.prueba2.entities.Factura;
 import controllers.util.JsfUtil;
 import controllers.util.JsfUtil.PersistAction;
 import com.mycompany.prueba2.daos.FacturaDao;
-import com.mycompany.prueba2.daos.FacturahasProductoDao;
 import com.mycompany.prueba2.daos.ProductoDao;
-import com.mycompany.prueba2.entities.FacturaPK;
-import com.mycompany.prueba2.entities.FacturahasProducto;
-import com.mycompany.prueba2.entities.FacturahasProductoPK;
 import com.mycompany.prueba2.entities.Producto;
 
 import java.io.Serializable;
@@ -39,9 +35,6 @@ public class FacturaController implements Serializable {
     @EJB
     private ProductoDao productoDao;
 
-    @EJB
-    private FacturahasProductoDao facturahasProductoDao;
-
     private List<Factura> items = null;
     private Factura selected;
 
@@ -57,26 +50,6 @@ public class FacturaController implements Serializable {
     }
 
     public FacturaController() {
-    }
-
-    public Factura getSelected() {
-        return selected;
-    }
-
-    public void setSelected(Factura selected) {
-        this.selected = selected;
-    }
-
-    protected void setEmbeddableKeys() {
-        selected.getFacturaPK().setClienteidCliente(selected.getCliente().getIdCliente());
-    }
-
-    protected void initializeEmbeddableKey() {
-        selected.setFacturaPK(new FacturaPK());
-    }
-
-    private FacturaDao getDao() {
-        return facturaDao;
     }
 
     public Producto getProductSelected() {
@@ -130,6 +103,28 @@ public class FacturaController implements Serializable {
         this.productosTemporales = productosTemporales;
     }
 
+    public Factura getSelected() {
+        return selected;
+    }
+
+    public void setSelected(Factura selected) {
+        this.selected = selected;
+    }
+
+    protected void setEmbeddableKeys() {
+    }
+
+    protected void initializeEmbeddableKey() {
+    }
+
+    private FacturaDao getFacturaDao() {
+        return facturaDao;
+    }
+
+    public ProductoDao getProductoDao() {
+        return productoDao;
+    }
+
     public void productoHandleChange(ValueChangeEvent event) {
         Producto selectedProducto = (Producto) event.getNewValue();
         productoCantidad = selectedProducto.getCantidad();
@@ -159,15 +154,9 @@ public class FacturaController implements Serializable {
     public Factura prepareCreate() {
         selected = new Factura();
         initializeEmbeddableKey();
+        productosTemporales = productoDao.findAll();
         selected.setFechaCreacion(new Date());
         return selected;
-    }
-
-    public void clearFields() {
-        productoCantidad = -1;
-        productoCantidadSelected = 0;
-        productos = new ArrayList<>();
-        productosTemporales = new ArrayList<>();
     }
 
     public void create() {
@@ -191,7 +180,7 @@ public class FacturaController implements Serializable {
 
     public List<Factura> getItems() {
         if (items == null) {
-            items = getDao().findAll();
+            items = getFacturaDao().findAll();
         }
         return items;
     }
@@ -201,30 +190,11 @@ public class FacturaController implements Serializable {
             setEmbeddableKeys();
             try {
                 if (persistAction == PersistAction.CREATE) {
-                    getDao().create(selected);
-                    System.out.println("----------------------");
-                    System.out.println(selected.toString());
-                    for (Producto producto : productos) {
-                        FacturahasProductoPK facturahasProductoPK = new FacturahasProductoPK();
-                        facturahasProductoPK.setFacturaidFactura(selected.getFacturaPK().getIdFactura());
-                        facturahasProductoPK.setProductoidProducto(producto.getIdProducto());
-                        
-                        FacturahasProducto facturahasProducto = new FacturahasProducto();
-                        facturahasProducto.setFacturahasProductoPK(facturahasProductoPK);
-                        facturahasProducto.setFactura(selected);
-                        facturahasProducto.setProducto(producto);
-                        facturahasProducto.setCantidadProducto(producto.getCantidad());
-                        
-                        facturahasProductoDao.create(facturahasProducto);
-
-                    }
-                    for (Producto productosTemporale : productosTemporales) {
-                        productoDao.edit(productosTemporale);
-                    }
+                    getFacturaDao().create(selected);
                 } else if (persistAction != PersistAction.DELETE) {
-                    getDao().edit(selected);
+                    getFacturaDao().edit(selected);
                 } else {
-                    getDao().remove(selected);
+                    getFacturaDao().remove(selected);
                 }
                 JsfUtil.addSuccessMessage(successMessage);
             } catch (EJBException ex) {
@@ -245,23 +215,20 @@ public class FacturaController implements Serializable {
         }
     }
 
-    public Factura getFactura(FacturaPK id) {
-        return getDao().find(id);
+    public Factura getFactura(java.lang.Integer id) {
+        return getFacturaDao().find(id);
     }
 
     public List<Factura> getItemsAvailableSelectMany() {
-        return getDao().findAll();
+        return getFacturaDao().findAll();
     }
 
     public List<Factura> getItemsAvailableSelectOne() {
-        return getDao().findAll();
+        return getFacturaDao().findAll();
     }
 
     @FacesConverter(forClass = Factura.class)
     public static class FacturaControllerConverter implements Converter {
-
-        private static final String SEPARATOR = "#";
-        private static final String SEPARATOR_ESCAPED = "\\#";
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
@@ -273,20 +240,15 @@ public class FacturaController implements Serializable {
             return controller.getFactura(getKey(value));
         }
 
-        FacturaPK getKey(String value) {
-            FacturaPK key;
-            String values[] = value.split(SEPARATOR_ESCAPED);
-            key = new FacturaPK();
-            key.setIdFactura(Integer.parseInt(values[0]));
-            key.setClienteidCliente(Integer.parseInt(values[1]));
+        java.lang.Integer getKey(String value) {
+            java.lang.Integer key;
+            key = Integer.valueOf(value);
             return key;
         }
 
-        String getStringKey(FacturaPK value) {
+        String getStringKey(java.lang.Integer value) {
             StringBuilder sb = new StringBuilder();
-            sb.append(value.getIdFactura());
-            sb.append(SEPARATOR);
-            sb.append(value.getClienteidCliente());
+            sb.append(value);
             return sb.toString();
         }
 
@@ -297,7 +259,7 @@ public class FacturaController implements Serializable {
             }
             if (object instanceof Factura) {
                 Factura o = (Factura) object;
-                return getStringKey(o.getFacturaPK());
+                return getStringKey(o.getIdFactura());
             } else {
                 Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Factura.class.getName()});
                 return null;

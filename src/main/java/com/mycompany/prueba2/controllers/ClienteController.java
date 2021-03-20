@@ -45,7 +45,7 @@ public class ClienteController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
-    private ClienteDao getDao() {
+    private ClienteDao getClienteDao() {
         return clienteDao;
     }
 
@@ -76,7 +76,7 @@ public class ClienteController implements Serializable {
 
     public List<Cliente> getItems() {
         if (items == null) {
-            items = getDao().findAll();
+            items = getClienteDao().findAll();
         }
         return items;
     }
@@ -86,9 +86,9 @@ public class ClienteController implements Serializable {
             setEmbeddableKeys();
             try {
                 if (persistAction != PersistAction.DELETE) {
-                    getDao().edit(selected);
+                    getClienteDao().edit(selected);
                 } else {
-                    getDao().remove(selected);
+                    getClienteDao().remove(selected);
                 }
                 JsfUtil.addSuccessMessage(successMessage);
             } catch (EJBException ex) {
@@ -110,15 +110,15 @@ public class ClienteController implements Serializable {
     }
 
     public Cliente getCliente(java.lang.Integer id) {
-        return getDao().find(id);
+        return getClienteDao().find(id);
     }
 
     public List<Cliente> getItemsAvailableSelectMany() {
-        return getDao().findAll();
+        return getClienteDao().findAll();
     }
 
     public List<Cliente> getItemsAvailableSelectOne() {
-        return getDao().findAll();
+        return getClienteDao().findAll();
     }
 
     @FacesConverter(forClass = Cliente.class)

@@ -12,14 +12,14 @@
             <h:form id="FacturaViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{facturaController.selected != null}">
-                        <h:outputText value="#{bundle.ViewFacturaLabel_facturaPK_idFactura}"/>
-                        <h:outputText value="#{facturaController.selected.facturaPK.idFactura}" title="#{bundle.ViewFacturaTitle_facturaPK_idFactura}"/>
+                        <h:outputText value="#{bundle.ViewFacturaLabel_idFactura}"/>
+                        <h:outputText value="#{facturaController.selected.idFactura}" title="#{bundle.ViewFacturaTitle_idFactura}"/>
                         <h:outputText value="#{bundle.ViewFacturaLabel_fechaCreacion}"/>
                         <h:outputText value="#{facturaController.selected.fechaCreacion}" title="#{bundle.ViewFacturaTitle_fechaCreacion}">
                             <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
                         </h:outputText>
-                        <h:outputText value="#{bundle.ViewFacturaLabel_cliente}"/>
-                        <h:outputText value="#{facturaController.selected.cliente}" title="#{bundle.ViewFacturaTitle_cliente}"/>
+                        <h:outputText value="#{bundle.ViewFacturaLabel_clienteidCliente}"/>
+                        <h:outputText value="#{facturaController.selected.clienteidCliente}" title="#{bundle.ViewFacturaTitle_clienteidCliente}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="FacturaViewDialog.hide()"/>
                 </h:panelGroup>

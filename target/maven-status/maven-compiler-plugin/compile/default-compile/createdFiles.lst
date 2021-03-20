@@ -1,12 +1,10 @@
 com/mycompany/prueba2/controllers/FacturaController$FacturaControllerConverter.class
 com/mycompany/prueba2/controllers/ClienteController.class
-com/mycompany/prueba2/entities/FacturaPK_.class
 controllers/util/JsfUtil.class
 com/mycompany/prueba2/controllers/ProductoController$ProductoControllerConverter.class
 com/mycompany/prueba2/daos/FacturahasProductoDao.class
 com/mycompany/prueba2/entities/FacturahasProducto_.class
 com/mycompany/prueba2/entities/Factura.class
-com/mycompany/prueba2/entities/FacturaPK.class
 controllers/util/JsfUtil$PersistAction.class
 com/mycompany/prueba2/entities/Factura_.class
 com/mycompany/prueba2/entities/FacturahasProductoPK.class

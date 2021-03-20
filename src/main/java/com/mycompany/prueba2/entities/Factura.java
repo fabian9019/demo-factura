@@ -11,8 +11,10 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -33,24 +35,25 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Factura.findAll", query = "SELECT f FROM Factura f")
-    , @NamedQuery(name = "Factura.findByIdFactura", query = "SELECT f FROM Factura f WHERE f.facturaPK.idFactura = :idFactura")
-    , @NamedQuery(name = "Factura.findByFechaCreacion", query = "SELECT f FROM Factura f WHERE f.fechaCreacion = :fechaCreacion")
-    , @NamedQuery(name = "Factura.findByClienteidCliente", query = "SELECT f FROM Factura f WHERE f.facturaPK.clienteidCliente = :clienteidCliente")})
+    , @NamedQuery(name = "Factura.findByIdFactura", query = "SELECT f FROM Factura f WHERE f.idFactura = :idFactura")
+    , @NamedQuery(name = "Factura.findByFechaCreacion", query = "SELECT f FROM Factura f WHERE f.fechaCreacion = :fechaCreacion")})
 public class Factura implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
-    @EmbeddedId
-    protected FacturaPK facturaPK;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "idFactura")
+    private Integer idFactura;
     
     @Basic(optional = false)
     @Column(name = "FechaCreacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaCreacion;
     
-    @JoinColumn(name = "Cliente_idCliente", referencedColumnName = "idCliente", insertable = false, updatable = false)
+    @JoinColumn(name = "Cliente_idCliente", referencedColumnName = "idCliente")
     @ManyToOne(optional = false)
-    private Cliente cliente;
+    private Cliente clienteidCliente;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "factura")
     private List<FacturahasProducto> facturahasProductoList;
@@ -58,25 +61,21 @@ public class Factura implements Serializable {
     public Factura() {
     }
 
-    public Factura(FacturaPK facturaPK) {
-        this.facturaPK = facturaPK;
+    public Factura(Integer idFactura) {
+        this.idFactura = idFactura;
     }
 
-    public Factura(FacturaPK facturaPK, Date fechaCreacion) {
-        this.facturaPK = facturaPK;
+    public Factura(Integer idFactura, Date fechaCreacion) {
+        this.idFactura = idFactura;
         this.fechaCreacion = fechaCreacion;
     }
 
-    public Factura(int idFactura, int clienteidCliente) {
-        this.facturaPK = new FacturaPK(idFactura, clienteidCliente);
+    public Integer getIdFactura() {
+        return idFactura;
     }
 
-    public FacturaPK getFacturaPK() {
-        return facturaPK;
-    }
-
-    public void setFacturaPK(FacturaPK facturaPK) {
-        this.facturaPK = facturaPK;
+    public void setIdFactura(Integer idFactura) {
+        this.idFactura = idFactura;
     }
 
     public Date getFechaCreacion() {
@@ -87,12 +86,12 @@ public class Factura implements Serializable {
         this.fechaCreacion = fechaCreacion;
     }
 
-    public Cliente getCliente() {
-        return cliente;
+    public Cliente getClienteidCliente() {
+        return clienteidCliente;
     }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+    public void setClienteidCliente(Cliente clienteidCliente) {
+        this.clienteidCliente = clienteidCliente;
     }
 
     @XmlTransient
@@ -107,7 +106,7 @@ public class Factura implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (facturaPK != null ? facturaPK.hashCode() : 0);
+        hash += (idFactura != null ? idFactura.hashCode() : 0);
         return hash;
     }
 
@@ -118,7 +117,7 @@ public class Factura implements Serializable {
             return false;
         }
         Factura other = (Factura) object;
-        if ((this.facturaPK == null && other.facturaPK != null) || (this.facturaPK != null && !this.facturaPK.equals(other.facturaPK))) {
+        if ((this.idFactura == null && other.idFactura != null) || (this.idFactura != null && !this.idFactura.equals(other.idFactura))) {
             return false;
         }
         return true;
@@ -126,7 +125,7 @@ public class Factura implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.Factura[ facturaPK=" + facturaPK + " ]";
+        return "entities.Factura[ idFactura=" + idFactura + " ]";
     }
     
 }

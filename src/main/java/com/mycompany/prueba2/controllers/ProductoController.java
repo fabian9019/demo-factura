@@ -45,7 +45,7 @@ public class ProductoController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
-    private ProductoDao getDao() {
+    private ProductoDao getProductoDao() {
         return productoDao;
     }
 
@@ -76,7 +76,7 @@ public class ProductoController implements Serializable {
 
     public List<Producto> getItems() {
         if (items == null) {
-            items = getDao().findAll();
+            items = getProductoDao().findAll();
         }
         return items;
     }
@@ -86,9 +86,9 @@ public class ProductoController implements Serializable {
             setEmbeddableKeys();
             try {
                 if (persistAction != PersistAction.DELETE) {
-                    getDao().edit(selected);
+                    getProductoDao().edit(selected);
                 } else {
-                    getDao().remove(selected);
+                    getProductoDao().remove(selected);
                 }
                 JsfUtil.addSuccessMessage(successMessage);
             } catch (EJBException ex) {
@@ -110,15 +110,15 @@ public class ProductoController implements Serializable {
     }
 
     public Producto getProducto(java.lang.Integer id) {
-        return getDao().find(id);
+        return getProductoDao().find(id);
     }
 
     public List<Producto> getItemsAvailableSelectMany() {
-        return getDao().findAll();
+        return getProductoDao().findAll();
     }
 
     public List<Producto> getItemsAvailableSelectOne() {
-        return getDao().findAll();
+        return getProductoDao().findAll();
     }
 
     @FacesConverter(forClass = Producto.class)

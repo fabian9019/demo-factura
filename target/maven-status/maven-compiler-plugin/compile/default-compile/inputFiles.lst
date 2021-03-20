@@ -3,7 +3,6 @@
 /Users/fabiancaicedocuellar/NetBeansProjects/prueba2/src/main/java/com/mycompany/prueba2/entities/Producto.java
 /Users/fabiancaicedocuellar/NetBeansProjects/prueba2/src/main/java/com/mycompany/prueba2/controllers/FacturaController.java
 /Users/fabiancaicedocuellar/NetBeansProjects/prueba2/src/main/java/com/mycompany/prueba2/entities/FacturahasProductoPK.java
-/Users/fabiancaicedocuellar/NetBeansProjects/prueba2/src/main/java/com/mycompany/prueba2/entities/FacturaPK.java
 /Users/fabiancaicedocuellar/NetBeansProjects/prueba2/src/main/java/com/mycompany/prueba2/controllers/FacturahasProductoController.java
 /Users/fabiancaicedocuellar/NetBeansProjects/prueba2/src/main/java/com/mycompany/prueba2/JAXRSConfiguration.java
 /Users/fabiancaicedocuellar/NetBeansProjects/prueba2/src/main/java/com/mycompany/prueba2/utilities/JsfUtil.java
