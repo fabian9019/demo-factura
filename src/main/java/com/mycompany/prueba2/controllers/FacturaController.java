@@ -4,7 +4,10 @@ import com.mycompany.prueba2.entities.Factura;
 import controllers.util.JsfUtil;
 import controllers.util.JsfUtil.PersistAction;
 import com.mycompany.prueba2.daos.FacturaDao;
+import com.mycompany.prueba2.daos.FacturahasProductoDao;
 import com.mycompany.prueba2.daos.ProductoDao;
+import com.mycompany.prueba2.entities.FacturahasProducto;
+import com.mycompany.prueba2.entities.FacturahasProductoPK;
 import com.mycompany.prueba2.entities.Producto;
 
 import java.io.Serializable;
@@ -34,6 +37,9 @@ public class FacturaController implements Serializable {
 
     @EJB
     private ProductoDao productoDao;
+
+    @EJB
+    private FacturahasProductoDao facturahasProductoDao;
 
     private List<Factura> items = null;
     private Factura selected;
@@ -191,6 +197,46 @@ public class FacturaController implements Serializable {
             try {
                 if (persistAction == PersistAction.CREATE) {
                     getFacturaDao().create(selected);
+
+                    productos.forEach((producto) -> {
+                        FacturahasProductoPK facturahasProductoPK = new FacturahasProductoPK();
+                        facturahasProductoPK.setFacturaidFactura(selected.getIdFactura());
+                        facturahasProductoPK.setProductoidProducto(producto.getIdProducto());
+
+                        FacturahasProducto facturahasProducto = new FacturahasProducto();
+                        facturahasProducto.setFactura(selected);
+                        facturahasProducto.setProducto(producto);
+                        facturahasProducto.setCantidadProducto(producto.getCantidad());
+                        facturahasProducto.setFacturahasProductoPK(facturahasProductoPK);
+
+                        facturahasProductoDao.create(facturahasProducto);
+                    });
+                    /*
+                    for (Producto producto : productos) {
+                        
+                        FacturahasProductoPK facturahasProductoPK = new FacturahasProductoPK();
+                        facturahasProductoPK.setFacturaidFactura(selected.getIdFactura());
+                        facturahasProductoPK.setProductoidProducto(producto.getIdProducto());
+                        
+                        FacturahasProducto facturahasProducto = new FacturahasProducto();
+                        facturahasProducto.setFactura(selected);
+                        facturahasProducto.setProducto(producto);
+                        facturahasProducto.setCantidadProducto(producto.getCantidad());
+                        facturahasProducto.setFacturahasProductoPK(facturahasProductoPK);
+                        
+                        facturahasProductoDao.create(facturahasProducto);
+
+                    }*/
+                    productosTemporales.forEach((productoTemp) -> {
+                        System.err.println("ID: " + productoTemp.getIdProducto() + " - Descripción: " + productoTemp.getDescripcion() + " - Cantidad: " + productoTemp.getCantidad() + " - Valor: " + productoTemp.getValor());
+                        productoDao.edit(productoTemp);
+                    });
+
+                    /*
+                    for (Producto productosTemporale : productosTemporales) {
+                        productoDao.edit(productosTemporale);
+                    }
+                     */
                 } else if (persistAction != PersistAction.DELETE) {
                     getFacturaDao().edit(selected);
                 } else {

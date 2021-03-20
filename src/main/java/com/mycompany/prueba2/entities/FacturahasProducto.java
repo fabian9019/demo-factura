@@ -40,8 +40,7 @@ public class FacturahasProducto implements Serializable {
     @Basic(optional = false)
     @Column(name = "cantidadProducto")
     private int cantidadProducto;
-    
-    //@JoinColumn(name = "Factura_idFactura", referencedColumnName = "idFactura", insertable = false, updatable = false)
+        
     @JoinColumns({
         @JoinColumn(name = "Factura_idFactura", referencedColumnName = "idFactura", insertable = false, updatable = false),
         @JoinColumn(name = "Producto_idProducto", referencedColumnName = "idProducto", insertable = false, updatable = false)
@@ -52,8 +51,7 @@ public class FacturahasProducto implements Serializable {
     @JoinColumns({
         @JoinColumn(name = "Factura_idFactura", referencedColumnName = "idFactura", insertable = false, updatable = false),
         @JoinColumn(name = "Producto_idProducto", referencedColumnName = "idProducto", insertable = false, updatable = false)
-    })
-    //@JoinColumn(name = "Producto_idProducto", referencedColumnName = "idProducto", insertable = false, updatable = false)
+    })    
     @ManyToOne(optional = false)
     private Producto producto;
 
