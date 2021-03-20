@@ -9,34 +9,33 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author USUARIO
+ * @author fabiancaicedocuellar
  */
 @Entity
 @Table(name = "Factura")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Factura.findAll", query = "SELECT f FROM Factura f"),
-    @NamedQuery(name = "Factura.findByIdFactura", query = "SELECT f FROM Factura f WHERE f.facturaPK.idFactura = :idFactura"),
-    @NamedQuery(name = "Factura.findByFechaCreacion", query = "SELECT f FROM Factura f WHERE f.fechaCreacion = :fechaCreacion"),
-    @NamedQuery(name = "Factura.findByClienteidCliente", query = "SELECT f FROM Factura f WHERE f.facturaPK.clienteidCliente = :clienteidCliente")})
+    @NamedQuery(name = "Factura.findAll", query = "SELECT f FROM Factura f")
+    , @NamedQuery(name = "Factura.findByIdFactura", query = "SELECT f FROM Factura f WHERE f.facturaPK.idFactura = :idFactura")
+    , @NamedQuery(name = "Factura.findByFechaCreacion", query = "SELECT f FROM Factura f WHERE f.fechaCreacion = :fechaCreacion")
+    , @NamedQuery(name = "Factura.findByClienteidCliente", query = "SELECT f FROM Factura f WHERE f.facturaPK.clienteidCliente = :clienteidCliente")})
 public class Factura implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -45,23 +44,16 @@ public class Factura implements Serializable {
     protected FacturaPK facturaPK;
     
     @Basic(optional = false)
-    @NotNull
     @Column(name = "FechaCreacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaCreacion;
     
-    @JoinTable(
-            name = "Factura_has_Producto", 
-            joinColumns = {@JoinColumn(name = "Factura_idFactura", referencedColumnName = "idFactura"),
-                            @JoinColumn(name = "Producto_idProducto", referencedColumnName = "idProducto")},
-            
-        inverseJoinColumns = {@JoinColumn(name = "Producto_idProducto", referencedColumnName = "idProducto")})
-    @ManyToMany
-    private List<Producto> productoList;
-    
     @JoinColumn(name = "Cliente_idCliente", referencedColumnName = "idCliente", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Cliente cliente;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "factura")
+    private List<FacturahasProducto> facturahasProductoList;
 
     public Factura() {
     }
@@ -95,21 +87,21 @@ public class Factura implements Serializable {
         this.fechaCreacion = fechaCreacion;
     }
 
-    @XmlTransient
-    public List<Producto> getProductoList() {
-        return productoList;
-    }
-
-    public void setProductoList(List<Producto> productoList) {
-        this.productoList = productoList;
-    }
-
     public Cliente getCliente() {
         return cliente;
     }
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
+    }
+
+    @XmlTransient
+    public List<FacturahasProducto> getFacturahasProductoList() {
+        return facturahasProductoList;
+    }
+
+    public void setFacturahasProductoList(List<FacturahasProducto> facturahasProductoList) {
+        this.facturahasProductoList = facturahasProductoList;
     }
 
     @Override
@@ -134,7 +126,7 @@ public class Factura implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mycompany.mavenproject2.entity.Factura[ facturaPK=" + facturaPK + " ]";
+        return "entities.Factura[ facturaPK=" + facturaPK + " ]";
     }
     
 }

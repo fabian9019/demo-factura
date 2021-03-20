@@ -1,8 +1,8 @@
 package com.mycompany.prueba2.controllers;
 
 import com.mycompany.prueba2.entities.Producto;
-import com.mycompany.prueba2.utilities.JsfUtil;
-import com.mycompany.prueba2.utilities.JsfUtil.PersistAction;
+import controllers.util.JsfUtil;
+import controllers.util.JsfUtil.PersistAction;
 import com.mycompany.prueba2.daos.ProductoDao;
 
 import java.io.Serializable;
@@ -24,7 +24,7 @@ import javax.faces.convert.FacesConverter;
 public class ProductoController implements Serializable {
 
     @EJB
-    private ProductoDao ejbFacade;
+    private ProductoDao productoDao;
     private List<Producto> items = null;
     private Producto selected;
 
@@ -45,8 +45,8 @@ public class ProductoController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
-    private ProductoDao getFacade() {
-        return ejbFacade;
+    private ProductoDao getDao() {
+        return productoDao;
     }
 
     public Producto prepareCreate() {
@@ -76,7 +76,7 @@ public class ProductoController implements Serializable {
 
     public List<Producto> getItems() {
         if (items == null) {
-            items = getFacade().findAll();
+            items = getDao().findAll();
         }
         return items;
     }
@@ -86,9 +86,9 @@ public class ProductoController implements Serializable {
             setEmbeddableKeys();
             try {
                 if (persistAction != PersistAction.DELETE) {
-                    getFacade().edit(selected);
+                    getDao().edit(selected);
                 } else {
-                    getFacade().remove(selected);
+                    getDao().remove(selected);
                 }
                 JsfUtil.addSuccessMessage(successMessage);
             } catch (EJBException ex) {
@@ -110,15 +110,15 @@ public class ProductoController implements Serializable {
     }
 
     public Producto getProducto(java.lang.Integer id) {
-        return getFacade().find(id);
+        return getDao().find(id);
     }
 
     public List<Producto> getItemsAvailableSelectMany() {
-        return getFacade().findAll();
+        return getDao().findAll();
     }
 
     public List<Producto> getItemsAvailableSelectOne() {
-        return getFacade().findAll();
+        return getDao().findAll();
     }
 
     @FacesConverter(forClass = Producto.class)

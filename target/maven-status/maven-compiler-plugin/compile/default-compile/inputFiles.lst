@@ -1,7 +1,10 @@
+/Users/fabiancaicedocuellar/NetBeansProjects/prueba2/src/main/java/com/mycompany/prueba2/entities/FacturahasProducto.java
 /Users/fabiancaicedocuellar/NetBeansProjects/prueba2/src/main/java/com/mycompany/prueba2/entities/Factura.java
 /Users/fabiancaicedocuellar/NetBeansProjects/prueba2/src/main/java/com/mycompany/prueba2/entities/Producto.java
 /Users/fabiancaicedocuellar/NetBeansProjects/prueba2/src/main/java/com/mycompany/prueba2/controllers/FacturaController.java
+/Users/fabiancaicedocuellar/NetBeansProjects/prueba2/src/main/java/com/mycompany/prueba2/entities/FacturahasProductoPK.java
 /Users/fabiancaicedocuellar/NetBeansProjects/prueba2/src/main/java/com/mycompany/prueba2/entities/FacturaPK.java
+/Users/fabiancaicedocuellar/NetBeansProjects/prueba2/src/main/java/com/mycompany/prueba2/controllers/FacturahasProductoController.java
 /Users/fabiancaicedocuellar/NetBeansProjects/prueba2/src/main/java/com/mycompany/prueba2/JAXRSConfiguration.java
 /Users/fabiancaicedocuellar/NetBeansProjects/prueba2/src/main/java/com/mycompany/prueba2/utilities/JsfUtil.java
 /Users/fabiancaicedocuellar/NetBeansProjects/prueba2/src/main/java/com/mycompany/prueba2/controllers/ProductoController.java
@@ -9,6 +12,7 @@
 /Users/fabiancaicedocuellar/NetBeansProjects/prueba2/src/main/java/com/mycompany/prueba2/controllers/ClienteController.java
 /Users/fabiancaicedocuellar/NetBeansProjects/prueba2/src/main/java/com/mycompany/prueba2/daos/ClienteDao.java
 /Users/fabiancaicedocuellar/NetBeansProjects/prueba2/src/main/java/com/mycompany/prueba2/resources/JavaEE8Resource.java
+/Users/fabiancaicedocuellar/NetBeansProjects/prueba2/src/main/java/com/mycompany/prueba2/daos/FacturahasProductoDao.java
 /Users/fabiancaicedocuellar/NetBeansProjects/prueba2/src/main/java/com/mycompany/prueba2/daos/AbstractDao.java
 /Users/fabiancaicedocuellar/NetBeansProjects/prueba2/src/main/java/com/mycompany/prueba2/entities/Cliente.java
 /Users/fabiancaicedocuellar/NetBeansProjects/prueba2/src/main/java/com/mycompany/prueba2/daos/ProductoDao.java

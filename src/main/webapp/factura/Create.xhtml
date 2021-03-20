@@ -11,68 +11,18 @@
         <p:dialog id="FacturaCreateDlg" widgetVar="FacturaCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateFacturaTitle}">
             <h:form id="FacturaCreateForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="4" rendered="#{facturaController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateFacturaLabel_facturaPK_idFactura}" for="facturaPK_idFactura"/>
-                        <p:inputText id="facturaPK_idFactura" value="#{facturaController.selected.facturaPK.idFactura}" title="#{bundle.CreateFacturaTitle_facturaPK_idFactura}" required="true" requiredMessage="#{bundle.CreateFacturaRequiredMessage_facturaPK_idFactura}" />
-                        <p:outputLabel value=""/>
-                        <p:outputLabel value=""/>
-
+                    <p:panelGrid columns="2" rendered="#{facturaController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateFacturaLabel_facturaPK_idFactura}" for="facturaPK_idFactura" />
+                        <p:inputText id="facturaPK_idFactura" value="#{facturaController.selected.facturaPK.idFactura}" title="#{bundle.CreateFacturaTitle_facturaPK_idFactura}" required="true" requiredMessage="#{bundle.CreateFacturaRequiredMessage_facturaPK_idFactura}"/>
                         <p:outputLabel value="#{bundle.CreateFacturaLabel_fechaCreacion}" for="fechaCreacion" />
-                        <p:calendar id="fechaCreacion" pattern="MM/dd/yyyy HH:mm:ss" value="#{facturaController.selected.fechaCreacion}" title="#{bundle.EditFacturaTitle_fechaCreacion}" required="true" requiredMessage="#{bundle.EditFacturaRequiredMessage_fechaCreacion}" showOn="button" />
-                        <p:outputLabel value=""/>
-                        <p:outputLabel value=""/>
-
+                        <p:calendar id="fechaCreacion" pattern="MM/dd/yyyy HH:mm:ss" value="#{facturaController.selected.fechaCreacion}" title="#{bundle.EditFacturaTitle_fechaCreacion}" required="true" requiredMessage="#{bundle.EditFacturaRequiredMessage_fechaCreacion}" showOn="button"/>
                         <p:outputLabel value="#{bundle.CreateFacturaLabel_cliente}" for="cliente" />
                         <p:selectOneMenu id="cliente" value="#{facturaController.selected.cliente}" required="true" requiredMessage="#{bundle.EditFacturaRequiredMessage_cliente}">
                             <f:selectItems value="#{clienteController.itemsAvailableSelectOne}"
                                            var="clienteItem"
                                            itemValue="#{clienteItem}"/>
                         </p:selectOneMenu>
-                        <p:outputLabel value=""/>
-                        <p:outputLabel value=""/>
-
-                        
-                        <p:outputLabel value="#{bundle.CreateFacturaLabel_producto}"/>
-                        <p:selectOneMenu id="producto" value="#{facturaController.productSelected}" valueChangeListener="#{facturaController.productoHandleChange}">
-                            <f:selectItems value="#{facturaController.productosTemporales}"
-                                           var="productoItem" itemValue="#{productoItem}" />
-                            <f:ajax render="sliderPanel" resetValues="true"/>                            
-                        </p:selectOneMenu>
-                        <h:panelGrid columns="1" style="margin-bottom: 10px">
-                            <p:outputPanel id="sliderPanel">
-                                <p:inputText id="productoCantidadSlider" value="#{facturaController.productoCantidadSelected}"/>
-                                <p:slider for="productoCantidadSlider" range="max" minValue="0" maxValue="#{facturaController.productoCantidad}"/>
-                            </p:outputPanel>
-                        </h:panelGrid>
-                        <p:commandButton actionListener="#{facturaController.addProducto}" value="#{bundle.Add}" process="FacturaCreateForm" update=":FacturaCreateForm" />
-                        
                     </p:panelGrid>
-
-                    
-                    <p:dataTable id="productsTable" var="product" value="#{facturaController.productos}" rowKey="#{product.idProducto}"
-                                 selectionMode="single" style="width: 538px">
-                        <f:facet name="header">
-                            Productos
-                        </f:facet>
-
-                        <p:column headerText="Codigo">
-                            <h:outputText value="#{product.idProducto}" />
-                        </p:column>
-                        <p:column headerText="Descripcion">
-                            <h:outputText value="#{product.descripcion}" />
-                        </p:column>
-                        <p:column headerText="Cantidad">
-                            <h:outputText value="#{product.cantidad}" />
-                        </p:column>
-                        <p:column headerText="Valor">
-                            <h:outputText value="#{product.valor}" />
-                        </p:column>
-                        <p:column headerText="Total">
-                            <h:outputText value="#{product.cantidad*product.valor}" />
-                        </p:column>
-                    </p:dataTable>
-                    
-
                     <p:commandButton actionListener="#{facturaController.create}" value="#{bundle.Save}" update="display,:FacturaListForm:datalist,:growl" oncomplete="handleSubmit(args,'FacturaCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="FacturaCreateDialog.hide()"/>
                 </h:panelGroup>
