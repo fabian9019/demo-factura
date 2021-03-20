@@ -12,8 +12,8 @@
             <h:form id="FacturaCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="4" rendered="#{facturaController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateFacturaLabel_facturaPK_idFactura}" for="facturaPK_idFactura" />
-                        <p:inputText id="facturaPK_idFactura" value="#{facturaController.selected.facturaPK.idFactura}" title="#{bundle.CreateFacturaTitle_facturaPK_idFactura}" required="true" requiredMessage="#{bundle.CreateFacturaRequiredMessage_facturaPK_idFactura}" readonly="true"/>
+                        <p:outputLabel value="#{bundle.CreateFacturaLabel_idFactura}" for="idFactura" />
+                        <p:inputText id="idFactura" value="#{facturaController.selected.idFactura}" title="#{bundle.CreateFacturaTitle_idFactura}" required="true" requiredMessage="#{bundle.CreateFacturaRequiredMessage_idFactura}" readonly="true"/>
                         <p:outputLabel value=""/>
                         <p:outputLabel value=""/>
 
@@ -22,15 +22,15 @@
                         <p:outputLabel value=""/>
                         <p:outputLabel value=""/>
 
-                        <p:outputLabel value="#{bundle.CreateFacturaLabel_cliente}" for="cliente" />
-                        <p:selectOneMenu id="cliente" value="#{facturaController.selected.cliente}" required="true" requiredMessage="#{bundle.EditFacturaRequiredMessage_cliente}">
+                        <p:outputLabel value="#{bundle.CreateFacturaLabel_clienteidCliente}" for="clienteidCliente" />
+                        <p:selectOneMenu id="clienteidCliente" value="#{facturaController.selected.clienteidCliente}" required="true" requiredMessage="#{bundle.EditFacturaRequiredMessage_clienteidCliente}">
                             <f:selectItems value="#{clienteController.itemsAvailableSelectOne}"
-                                           var="clienteItem"
-                                           itemValue="#{clienteItem}"/>
+                                           var="clienteidClienteItem"
+                                           itemValue="#{clienteidClienteItem}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value=""/>
-                        <p:outputLabel value=""/>
-
+                        <p:outputLabel value=""/>                        
+                        
                         <p:outputLabel value="#{bundle.CreateFacturaLabel_producto}"/>
                         <p:selectOneMenu id="producto" value="#{facturaController.productSelected}" valueChangeListener="#{facturaController.productoHandleChange}">
                             <f:selectItems value="#{facturaController.productosTemporales}"
@@ -52,6 +52,7 @@
                         <f:facet name="header">
                             Productos
                         </f:facet>
+
                         <p:column headerText="Codigo">
                             <h:outputText value="#{product.idProducto}" />
                         </p:column>
@@ -68,7 +69,7 @@
                             <h:outputText value="#{product.cantidad*product.valor}" />
                         </p:column>
                     </p:dataTable>
-                    
+                                        
                     <p:commandButton actionListener="#{facturaController.create}" value="#{bundle.Save}" update="display,:FacturaListForm:datalist,:growl" oncomplete="handleSubmit(args,'FacturaCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="FacturaCreateDialog.hide()"/>
                 </h:panelGroup>

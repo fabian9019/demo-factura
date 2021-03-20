@@ -41,15 +41,15 @@ public class FacturahasProductoController implements Serializable {
     }
 
     protected void setEmbeddableKeys() {
-        selected.getFacturahasProductoPK().setFacturaidFactura(selected.getFactura().getFacturaPK().getIdFactura());
         selected.getFacturahasProductoPK().setProductoidProducto(selected.getProducto().getIdProducto());
+        selected.getFacturahasProductoPK().setFacturaidFactura(selected.getFactura().getIdFactura());
     }
 
     protected void initializeEmbeddableKey() {
         selected.setFacturahasProductoPK(new FacturahasProductoPK());
     }
 
-    private FacturahasProductoDao getDao() {
+    private FacturahasProductoDao getFacturahasProductoDao() {
         return facturahasProductoDao;
     }
 
@@ -80,7 +80,7 @@ public class FacturahasProductoController implements Serializable {
 
     public List<FacturahasProducto> getItems() {
         if (items == null) {
-            items = getDao().findAll();
+            items = getFacturahasProductoDao().findAll();
         }
         return items;
     }
@@ -90,9 +90,9 @@ public class FacturahasProductoController implements Serializable {
             setEmbeddableKeys();
             try {
                 if (persistAction != PersistAction.DELETE) {
-                    getDao().edit(selected);
+                    getFacturahasProductoDao().edit(selected);
                 } else {
-                    getDao().remove(selected);
+                    getFacturahasProductoDao().remove(selected);
                 }
                 JsfUtil.addSuccessMessage(successMessage);
             } catch (EJBException ex) {
@@ -114,15 +114,15 @@ public class FacturahasProductoController implements Serializable {
     }
 
     public FacturahasProducto getFacturahasProducto(FacturahasProductoPK id) {
-        return getDao().find(id);
+        return getFacturahasProductoDao().find(id);
     }
 
     public List<FacturahasProducto> getItemsAvailableSelectMany() {
-        return getDao().findAll();
+        return getFacturahasProductoDao().findAll();
     }
 
     public List<FacturahasProducto> getItemsAvailableSelectOne() {
-        return getDao().findAll();
+        return getFacturahasProductoDao().findAll();
     }
 
     @FacesConverter(forClass = FacturahasProducto.class)

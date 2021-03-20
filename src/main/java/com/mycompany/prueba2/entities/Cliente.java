@@ -40,9 +40,11 @@ public class Cliente implements Serializable {
     @Basic(optional = false)
     @Column(name = "idCliente")
     private Integer idCliente;
+
     @Column(name = "Nombre")
     private String nombre;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cliente")
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "clienteidCliente")
     private List<Factura> facturaList;
 
     public Cliente() {

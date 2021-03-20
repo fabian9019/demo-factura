@@ -19,7 +19,7 @@
                     <p:dataTable id="datalist" value="#{facturaController.items}" var="item"
                                  selectionMode="single" selection="#{facturaController.selected}"
                                  paginator="true"
-                                 rowKey="#{item.facturaPK}"
+                                 rowKey="#{item.idFactura}"
                                  rows="10"
                                  rowsPerPageTemplate="10,20,30,40,50"
                                  >
@@ -29,9 +29,9 @@
 
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListFacturaTitle_facturaPK_idFactura}"/>
+                                <h:outputText value="#{bundle.ListFacturaTitle_idFactura}"/>
                             </f:facet>
-                            <h:outputText value="#{item.facturaPK.idFactura}"/>
+                            <h:outputText value="#{item.idFactura}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
@@ -43,9 +43,9 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListFacturaTitle_cliente}"/>
+                                <h:outputText value="#{bundle.ListFacturaTitle_clienteidCliente}"/>
                             </f:facet>
-                            <h:outputText value="#{item.cliente}"/>
+                            <h:outputText value="#{item.clienteidCliente}"/>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{facturaController.prepareCreate}" update=":FacturaCreateForm" oncomplete="PF('FacturaCreateDialog').show()"/>

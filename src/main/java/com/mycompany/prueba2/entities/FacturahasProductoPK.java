@@ -20,6 +20,7 @@ public class FacturahasProductoPK implements Serializable {
     @Basic(optional = false)
     @Column(name = "Factura_idFactura")
     private int facturaidFactura;
+    
     @Basic(optional = false)
     @Column(name = "Producto_idProducto")
     private int productoidProducto;

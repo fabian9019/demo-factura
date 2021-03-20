@@ -13,7 +13,6 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -42,20 +41,20 @@ public class FacturahasProducto implements Serializable {
     @Column(name = "cantidadProducto")
     private int cantidadProducto;
     
-    @ManyToOne(optional = false)
     //@JoinColumn(name = "Factura_idFactura", referencedColumnName = "idFactura", insertable = false, updatable = false)
     @JoinColumns({
         @JoinColumn(name = "Factura_idFactura", referencedColumnName = "idFactura", insertable = false, updatable = false),
         @JoinColumn(name = "Producto_idProducto", referencedColumnName = "idProducto", insertable = false, updatable = false)
     })
+    @ManyToOne(optional = false)
     private Factura factura;
     
-    //@JoinColumn(name = "Producto_idProducto", referencedColumnName = "idProducto", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
     @JoinColumns({
         @JoinColumn(name = "Factura_idFactura", referencedColumnName = "idFactura", insertable = false, updatable = false),
         @JoinColumn(name = "Producto_idProducto", referencedColumnName = "idProducto", insertable = false, updatable = false)
     })
+    //@JoinColumn(name = "Producto_idProducto", referencedColumnName = "idProducto", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
     private Producto producto;
 
     public FacturahasProducto() {
