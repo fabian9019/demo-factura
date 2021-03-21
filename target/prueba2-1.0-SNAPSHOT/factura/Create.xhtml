@@ -23,7 +23,7 @@
                         <p:outputLabel value=""/>
 
                         <p:outputLabel value="#{bundle.CreateFacturaLabel_valorTotal}" for="valorTotal" />
-                        <p:inputText id="valorTotal" value="#{facturaController.selected.valorTotal}" title="#{bundle.CreateFacturaTitle_valorTotal}" required="true" requiredMessage="#{bundle.CreateFacturaRequiredMessage_valorTotal}"/>
+                        <p:inputText id="valorTotal" value="#{facturaController.valorTotal}" title="#{bundle.CreateFacturaTitle_valorTotal}" required="true" requiredMessage="#{bundle.CreateFacturaRequiredMessage_valorTotal}" readonly="true"/>
                         <p:outputLabel value=""/>
                         <p:outputLabel value=""/>
 
@@ -36,7 +36,7 @@
                         <p:outputLabel value=""/>
                         <p:outputLabel value=""/>
 
-                        
+
                         <p:outputLabel value="#{bundle.CreateFacturaLabel_producto}"/>
                         <p:selectOneMenu id="producto" value="#{facturaController.productSelected}" valueChangeListener="#{facturaController.productoHandleChange}">
                             <f:selectItems value="#{facturaController.productosTemporales}"
@@ -49,13 +49,44 @@
                                 <p:slider for="productoCantidadSlider" range="max" minValue="0" maxValue="#{facturaController.productoCantidad}"/>
                             </p:outputPanel>
                         </h:panelGrid>
-                        <p:commandButton actionListener="#{facturaController.addProducto}" value="#{bundle.Add}" process="FacturaCreateForm" update=":FacturaCreateForm" />
-                        
-                        
+                        <p:commandButton actionListener="#{facturaController.addProducto}" value="#{bundle.Add}" process="FacturaCreateForm" update=":FacturaCreateForm" />                        
+
                     </p:panelGrid>
+
+                    <p:dataTable id="productsTable" var="product" value="#{facturaController.productos}" rowKey="#{product.idProducto}"
+                                 selectionMode="single" style="width: 539px">
+                        <f:facet name="header">
+                            Productos
+                        </f:facet>
+
+                        <p:column headerText="Codigo">
+                            <h:outputText value="#{product.idProducto}" />
+                        </p:column>
+                        <p:column headerText="Nombre">
+                            <h:outputText value="#{product.nombre}" />
+                        </p:column>
+                        <p:column headerText="Stock">
+                            <h:outputText value="#{product.stock}" />
+                        </p:column>
+                        <p:column headerText="Valor Unit">
+                            <h:outputText value="#{product.valorUnidad}" />
+                        </p:column>
+                        <p:column headerText="Total">
+                            <h:outputText value="#{product.stock*product.valorUnidad}" />
+                        </p:column>
+                        <p:columnGroup type="footer">
+                            <p:row>
+                                <p:column colspan="2" style="text-align:right" footerText="Totales:"/>
+                                <p:column style="text-align:left" footerText="#{facturaController.totalUnidades}"/>
+                                <p:column style="text-align:left" footerText="-"/>
+                                <p:column style="text-align:left" footerText="$#{facturaController.valorTotal}"/>
+                            </p:row>
+                        </p:columnGroup>
+                    </p:dataTable>
+
                     <p:commandButton actionListener="#{facturaController.create}" value="#{bundle.Save}" update="display,:FacturaListForm:datalist,:growl" oncomplete="handleSubmit(args,'FacturaCreateDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="FacturaCreateDialog.hide()"/>
-                </h:panelGroup>
+                    <p:commandButton actionListener="#{facturaController.clearFields}" value="#{bundle.Cancel}" onclick="FacturaCreateDialog.hide()"/>
+                </h:panelGroup>                
             </h:form>
         </p:dialog>
 

@@ -68,16 +68,15 @@ public class FacturaController implements Serializable {
     }
 
     public int getProductoCantidad() {
-        if (productSelected != null) {
-            productoCantidad = productSelected.getStock();
-        } else if (productoCantidad == -1) {
-            List<Producto> listTemp = productosTemporales;
-            if (listTemp.size() > 0) {
-                productoCantidad = listTemp.get(0).getStock();
-                productSelected = listTemp.get(0);
+        if (productoCantidad == -1) {
+            if (productosTemporales.size() > 0) {
+                productoCantidad = productosTemporales.get(0).getStock();
+                productSelected = productosTemporales.get(0);
             } else {
                 productoCantidad = 0;
             }
+        } else if (productSelected != null) {
+            productoCantidad = productosTemporales.get(productosTemporales.indexOf(productSelected)).getStock();
         }
         return productoCantidad;
     }
@@ -167,6 +166,8 @@ public class FacturaController implements Serializable {
         productoCantidadSelected = 0;
         productos = new ArrayList<>();
         productosTemporales = new ArrayList<>();
+        totalUnidades = 0;
+        valorTotal = 0;
     }
 
     public void productoHandleChange(ValueChangeEvent event) {
@@ -206,6 +207,7 @@ public class FacturaController implements Serializable {
     }
 
     public void create() {
+        selected.setValorTotal(getValorTotal());
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("FacturaCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
@@ -226,9 +228,7 @@ public class FacturaController implements Serializable {
     }
 
     public List<Factura> getItems() {
-        if (items == null) {
-            items = getFacturaDao().findAll();
-        }
+        items = getFacturaDao().findAll();
         return items;
     }
 
@@ -250,7 +250,7 @@ public class FacturaController implements Serializable {
                     });
 
                     productosTemporales.forEach((productoTemp) -> {
-                        //System.err.println("ID: " + productoTemp.getIdProducto() + " - Descripción: " + productoTemp.getDescripcion() + " - Cantidad: " + productoTemp.getCantidad() + " - Valor: " + productoTemp.getValor());
+                        System.err.println("Guardar - ID: " + productoTemp.getIdProducto() + " - Nombre: " + productoTemp.getNombre() + " - Cantidad: " + productoTemp.getStock() + " - Valor: " + productoTemp.getValorUnidad());
                         productoDao.edit(productoTemp);
                     });
 
