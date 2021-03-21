@@ -6,6 +6,7 @@
 package com.mycompany.prueba2.entities;
 
 import java.io.Serializable;
+import java.text.NumberFormat;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -144,7 +145,7 @@ public class Producto implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.Producto[ idProducto=" + idProducto + " ]";
+        return idProducto + " - " + nombre + " (" + NumberFormat.getCurrencyInstance().format(valorUnidad) + ")";
     }
     
 }

@@ -75,9 +75,7 @@ public class ClienteController implements Serializable {
     }
 
     public List<Cliente> getItems() {
-        if (items == null) {
-            items = getClienteDao().findAll();
-        }
+        items = getClienteDao().findAll();
         return items;
     }
 
