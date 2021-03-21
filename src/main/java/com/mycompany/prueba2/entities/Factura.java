@@ -31,32 +31,33 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author fabiancaicedocuellar
  */
 @Entity
-@Table(name = "Factura")
+@Table(name = "TEST_FACTURA")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Factura.findAll", query = "SELECT f FROM Factura f")
     , @NamedQuery(name = "Factura.findByIdFactura", query = "SELECT f FROM Factura f WHERE f.idFactura = :idFactura")
-    , @NamedQuery(name = "Factura.findByFechaCreacion", query = "SELECT f FROM Factura f WHERE f.fechaCreacion = :fechaCreacion")})
+    , @NamedQuery(name = "Factura.findByFechaVenta", query = "SELECT f FROM Factura f WHERE f.fechaVenta = :fechaVenta")
+    , @NamedQuery(name = "Factura.findByValorTotal", query = "SELECT f FROM Factura f WHERE f.valorTotal = :valorTotal")})
 public class Factura implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "idFactura")
+    @Column(name = "IdFactura")
     private Integer idFactura;
-    
     @Basic(optional = false)
-    @Column(name = "FechaCreacion")
+    @Column(name = "FechaVenta")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date fechaCreacion;
-    
-    @JoinColumn(name = "Cliente_idCliente", referencedColumnName = "idCliente")
+    private Date fechaVenta;
+    @Basic(optional = false)
+    @Column(name = "ValorTotal")
+    private double valorTotal;
+    @JoinColumn(name = "IdCliente", referencedColumnName = "IdCliente")
     @ManyToOne(optional = false)
-    private Cliente clienteidCliente;
-    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "factura")
-    private List<FacturahasProducto> facturahasProductoList;
+    private Cliente idCliente;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idFactura")
+    private List<FacturaDetalle> facturaDetalleList;
 
     public Factura() {
     }
@@ -65,9 +66,10 @@ public class Factura implements Serializable {
         this.idFactura = idFactura;
     }
 
-    public Factura(Integer idFactura, Date fechaCreacion) {
+    public Factura(Integer idFactura, Date fechaVenta, double valorTotal) {
         this.idFactura = idFactura;
-        this.fechaCreacion = fechaCreacion;
+        this.fechaVenta = fechaVenta;
+        this.valorTotal = valorTotal;
     }
 
     public Integer getIdFactura() {
@@ -78,29 +80,37 @@ public class Factura implements Serializable {
         this.idFactura = idFactura;
     }
 
-    public Date getFechaCreacion() {
-        return fechaCreacion;
+    public Date getFechaVenta() {
+        return fechaVenta;
     }
 
-    public void setFechaCreacion(Date fechaCreacion) {
-        this.fechaCreacion = fechaCreacion;
+    public void setFechaVenta(Date fechaVenta) {
+        this.fechaVenta = fechaVenta;
     }
 
-    public Cliente getClienteidCliente() {
-        return clienteidCliente;
+    public double getValorTotal() {
+        return valorTotal;
     }
 
-    public void setClienteidCliente(Cliente clienteidCliente) {
-        this.clienteidCliente = clienteidCliente;
+    public void setValorTotal(double valorTotal) {
+        this.valorTotal = valorTotal;
+    }
+
+    public Cliente getIdCliente() {
+        return idCliente;
+    }
+
+    public void setIdCliente(Cliente idCliente) {
+        this.idCliente = idCliente;
     }
 
     @XmlTransient
-    public List<FacturahasProducto> getFacturahasProductoList() {
-        return facturahasProductoList;
+    public List<FacturaDetalle> getFacturaDetalleList() {
+        return facturaDetalleList;
     }
 
-    public void setFacturahasProductoList(List<FacturahasProducto> facturahasProductoList) {
-        this.facturahasProductoList = facturahasProductoList;
+    public void setFacturaDetalleList(List<FacturaDetalle> facturaDetalleList) {
+        this.facturaDetalleList = facturaDetalleList;
     }
 
     @Override

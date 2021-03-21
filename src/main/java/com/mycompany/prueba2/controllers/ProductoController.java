@@ -75,7 +75,9 @@ public class ProductoController implements Serializable {
     }
 
     public List<Producto> getItems() {
-        items = getProductoDao().findAll();
+        if (items == null) {
+            items = getProductoDao().findAll();
+        }
         return items;
     }
 

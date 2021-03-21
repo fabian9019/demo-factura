@@ -35,23 +35,29 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListFacturaTitle_fechaCreacion}"/>
+                                <h:outputText value="#{bundle.ListFacturaTitle_fechaVenta}"/>
                             </f:facet>
-                            <h:outputText value="#{item.fechaCreacion}">
+                            <h:outputText value="#{item.fechaVenta}">
                                 <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
                             </h:outputText>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListFacturaTitle_clienteidCliente}"/>
+                                <h:outputText value="#{bundle.ListFacturaTitle_valorTotal}"/>
                             </f:facet>
-                            <h:outputText value="#{item.clienteidCliente}"/>
+                            <h:outputText value="#{item.valorTotal}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListFacturaTitle_idCliente}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idCliente}"/>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{facturaController.prepareCreate}" update=":FacturaCreateForm" oncomplete="PF('FacturaCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":FacturaViewForm" oncomplete="PF('FacturaViewDialog').show()" disabled="#{empty facturaController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":FacturaEditForm" oncomplete="PF('FacturaEditDialog').show()" disabled="true" />
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{facturaController.destroy}" update=":growl,datalist" disabled="true"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":FacturaEditForm" oncomplete="PF('FacturaEditDialog').show()" disabled="#{empty facturaController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{facturaController.destroy}" update=":growl,datalist" disabled="#{empty facturaController.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

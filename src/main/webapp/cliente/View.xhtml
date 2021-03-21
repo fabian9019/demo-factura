@@ -14,8 +14,18 @@
                     <p:panelGrid columns="2" rendered="#{clienteController.selected != null}">
                         <h:outputText value="#{bundle.ViewClienteLabel_idCliente}"/>
                         <h:outputText value="#{clienteController.selected.idCliente}" title="#{bundle.ViewClienteTitle_idCliente}"/>
-                        <h:outputText value="#{bundle.ViewClienteLabel_nombre}"/>
-                        <h:outputText value="#{clienteController.selected.nombre}" title="#{bundle.ViewClienteTitle_nombre}"/>
+                        <h:outputText value="#{bundle.ViewClienteLabel_identifiacion}"/>
+                        <h:outputText value="#{clienteController.selected.identifiacion}" title="#{bundle.ViewClienteTitle_identifiacion}"/>
+                        <h:outputText value="#{bundle.ViewClienteLabel_nombres}"/>
+                        <h:outputText value="#{clienteController.selected.nombres}" title="#{bundle.ViewClienteTitle_nombres}"/>
+                        <h:outputText value="#{bundle.ViewClienteLabel_apellidos}"/>
+                        <h:outputText value="#{clienteController.selected.apellidos}" title="#{bundle.ViewClienteTitle_apellidos}"/>
+                        <h:outputText value="#{bundle.ViewClienteLabel_direccion}"/>
+                        <h:outputText value="#{clienteController.selected.direccion}" title="#{bundle.ViewClienteTitle_direccion}"/>
+                        <h:outputText value="#{bundle.ViewClienteLabel_telefono}"/>
+                        <h:outputText value="#{clienteController.selected.telefono}" title="#{bundle.ViewClienteTitle_telefono}"/>
+                        <h:outputText value="#{bundle.ViewClienteLabel_email}"/>
+                        <h:outputText value="#{clienteController.selected.email}" title="#{bundle.ViewClienteTitle_email}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="ClienteViewDialog.hide()"/>
                 </h:panelGroup>

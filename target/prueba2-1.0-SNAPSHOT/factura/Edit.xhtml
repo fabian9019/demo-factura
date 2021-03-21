@@ -14,14 +14,16 @@
                     <p:panelGrid columns="2" rendered="#{facturaController.selected != null}">
                         <p:outputLabel value="#{bundle.EditFacturaLabel_idFactura}" for="idFactura" />
                         <p:inputText id="idFactura" value="#{facturaController.selected.idFactura}" title="#{bundle.EditFacturaTitle_idFactura}" required="true" requiredMessage="#{bundle.EditFacturaRequiredMessage_idFactura}"/>
-                        <p:outputLabel value="#{bundle.EditFacturaLabel_fechaCreacion}" for="fechaCreacion" />
-                        <p:calendar id="fechaCreacion" pattern="MM/dd/yyyy HH:mm:ss" value="#{facturaController.selected.fechaCreacion}" title="#{bundle.EditFacturaTitle_fechaCreacion}" required="true" requiredMessage="#{bundle.EditFacturaRequiredMessage_fechaCreacion}" showOn="button"/>
-                        <p:outputLabel value="#{bundle.EditFacturaLabel_clienteidCliente}" for="clienteidCliente" />
-                        <p:selectOneMenu id="clienteidCliente" value="#{facturaController.selected.clienteidCliente}" required="true" requiredMessage="#{bundle.EditFacturaRequiredMessage_clienteidCliente}">
+                        <p:outputLabel value="#{bundle.EditFacturaLabel_fechaVenta}" for="fechaVenta" />
+                        <p:calendar id="fechaVenta" pattern="MM/dd/yyyy HH:mm:ss" value="#{facturaController.selected.fechaVenta}" title="#{bundle.EditFacturaTitle_fechaVenta}" required="true" requiredMessage="#{bundle.EditFacturaRequiredMessage_fechaVenta}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditFacturaLabel_valorTotal}" for="valorTotal" />
+                        <p:inputText id="valorTotal" value="#{facturaController.selected.valorTotal}" title="#{bundle.EditFacturaTitle_valorTotal}" required="true" requiredMessage="#{bundle.EditFacturaRequiredMessage_valorTotal}"/>
+                        <p:outputLabel value="#{bundle.EditFacturaLabel_idCliente}" for="idCliente" />
+                        <p:selectOneMenu id="idCliente" value="#{facturaController.selected.idCliente}" required="true" requiredMessage="#{bundle.EditFacturaRequiredMessage_idCliente}">
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{clienteController.itemsAvailableSelectOne}"
-                                           var="clienteidClienteItem"
-                                           itemValue="#{clienteidClienteItem}"/>
+                                           var="idClienteItem"
+                                           itemValue="#{idClienteItem}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{facturaController.update}" value="#{bundle.Save}" update="display,:FacturaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'FacturaEditDialog');"/>
