@@ -1,8 +1,8 @@
 package com.mycompany.prueba2.controllers;
 
 import com.mycompany.prueba2.entities.Cliente;
-import controllers.util.JsfUtil;
-import controllers.util.JsfUtil.PersistAction;
+import com.mycompany.prueba2.utilities.JsfUtil;
+import com.mycompany.prueba2.utilities.JsfUtil.PersistAction;
 import com.mycompany.prueba2.daos.ClienteDao;
 
 import java.io.Serializable;
@@ -75,9 +75,7 @@ public class ClienteController implements Serializable {
     }
 
     public List<Cliente> getItems() {
-        if (items == null) {
-            items = getClienteDao().findAll();
-        }
+        items = getClienteDao().findAll();
         return items;
     }
 

@@ -1,8 +1,8 @@
 package com.mycompany.prueba2.controllers;
 
 import com.mycompany.prueba2.entities.FacturahasProducto;
-import controllers.util.JsfUtil;
-import controllers.util.JsfUtil.PersistAction;
+import com.mycompany.prueba2.utilities.JsfUtil;
+import com.mycompany.prueba2.utilities.JsfUtil.PersistAction;
 import com.mycompany.prueba2.daos.FacturahasProductoDao;
 import com.mycompany.prueba2.entities.FacturahasProductoPK;
 
