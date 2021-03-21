@@ -6,6 +6,7 @@
 package com.mycompany.prueba2.entities;
 
 import java.io.Serializable;
+import java.text.NumberFormat;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -29,11 +30,11 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "Producto")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Producto.findAll", query = "SELECT p FROM Producto p")
-    , @NamedQuery(name = "Producto.findByIdProducto", query = "SELECT p FROM Producto p WHERE p.idProducto = :idProducto")
-    , @NamedQuery(name = "Producto.findByDescripcion", query = "SELECT p FROM Producto p WHERE p.descripcion = :descripcion")
-    , @NamedQuery(name = "Producto.findByCantidad", query = "SELECT p FROM Producto p WHERE p.cantidad = :cantidad")
-    , @NamedQuery(name = "Producto.findByValor", query = "SELECT p FROM Producto p WHERE p.valor = :valor")})
+    @NamedQuery(name = "Producto.findAll", query = "SELECT p FROM Producto p"),
+    @NamedQuery(name = "Producto.findByIdProducto", query = "SELECT p FROM Producto p WHERE p.idProducto = :idProducto"),
+    @NamedQuery(name = "Producto.findByDescripcion", query = "SELECT p FROM Producto p WHERE p.descripcion = :descripcion"),
+    @NamedQuery(name = "Producto.findByCantidad", query = "SELECT p FROM Producto p WHERE p.cantidad = :cantidad"),
+    @NamedQuery(name = "Producto.findByValor", query = "SELECT p FROM Producto p WHERE p.valor = :valor")})
 public class Producto implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -42,17 +43,17 @@ public class Producto implements Serializable {
     @Basic(optional = false)
     @Column(name = "idProducto")
     private Integer idProducto;
-    
+
     @Column(name = "Descripcion")
     private String descripcion;
-    
+
     @Column(name = "Cantidad")
     private Integer cantidad;
-    
+
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "Valor")
     private Double valor;
-    
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "producto")
     private List<FacturahasProducto> facturahasProductoList;
 
@@ -126,7 +127,7 @@ public class Producto implements Serializable {
 
     @Override
     public String toString() {
-        return idProducto + " - "+ descripcion;
+        return idProducto + " - " + descripcion + " (" + NumberFormat.getCurrencyInstance().format(valor) + ")";
     }
-    
+
 }

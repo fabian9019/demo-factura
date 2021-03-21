@@ -96,20 +96,6 @@ public class FacturaController implements Serializable {
     }
 
     public List<Producto> getProductos() {
-        /*
-        if (selected!=null && selected.getIdFactura()!=null) {
-            System.out.println("faactura seleccionada: "+ selected.toString());
-            System.out.println("faactura seleccionada: "+ selected.getIdFactura());
-            List<FacturahasProducto> list = facturahasProductoDao.findByFacturaidFactura(selected.getIdFactura());
-            if (list==null) {
-                System.out.println("malisimooooo");
-            }else{
-                System.out.println("tamaño lista: "+list.size());
-            }
-        }
-        else{
-            System.out.println("nuloooo");
-        }*/
         return productos;
     }
 
