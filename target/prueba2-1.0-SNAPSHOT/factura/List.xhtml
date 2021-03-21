@@ -50,8 +50,8 @@
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{facturaController.prepareCreate}" update=":FacturaCreateForm" oncomplete="PF('FacturaCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":FacturaViewForm" oncomplete="PF('FacturaViewDialog').show()" disabled="#{empty facturaController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":FacturaEditForm" oncomplete="PF('FacturaEditDialog').show()" disabled="#{empty facturaController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{facturaController.destroy}" update=":growl,datalist" disabled="#{empty facturaController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":FacturaEditForm" oncomplete="PF('FacturaEditDialog').show()" disabled="true" />
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{facturaController.destroy}" update=":growl,datalist" disabled="true"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

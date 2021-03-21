@@ -43,13 +43,13 @@ public class FacturahasProducto implements Serializable {
         
     @JoinColumns({
         @JoinColumn(name = "Factura_idFactura", referencedColumnName = "idFactura", insertable = false, updatable = false),
-        @JoinColumn(name = "Producto_idProducto", referencedColumnName = "idProducto", insertable = false, updatable = false)
+        @JoinColumn(name = "Producto_idProducto", referencedColumnName = "idProducto", insertable = false, updatable = false, nullable = true)
     })
     @ManyToOne(optional = false)
     private Factura factura;
     
     @JoinColumns({
-        @JoinColumn(name = "Factura_idFactura", referencedColumnName = "idFactura", insertable = false, updatable = false),
+        @JoinColumn(name = "Factura_idFactura", referencedColumnName = "idFactura", insertable = false, updatable = false , nullable = true),
         @JoinColumn(name = "Producto_idProducto", referencedColumnName = "idProducto", insertable = false, updatable = false)
     })    
     @ManyToOne(optional = false)

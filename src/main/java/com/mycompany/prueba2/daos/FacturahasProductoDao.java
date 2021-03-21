@@ -6,9 +6,11 @@
 package com.mycompany.prueba2.daos;
 
 import com.mycompany.prueba2.entities.FacturahasProducto;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -29,4 +31,8 @@ public class FacturahasProductoDao extends AbstractDao<FacturahasProducto> {
         super(FacturahasProducto.class);
     }
     
+    public List<FacturahasProducto> findByFacturaidFactura(int idFactura){
+        System.out.println("com.mycompany.prueba2.daos.FacturahasProductoDao.findByFacturaidFactura()");
+        return em.createQuery("SELECT f FROM FacturahasProducto f WHERE f.facturahasProductoPK.facturaidFactura = :facturaidFactura").setParameter("facturaidFactura", idFactura).getResultList();
+    }
 }
