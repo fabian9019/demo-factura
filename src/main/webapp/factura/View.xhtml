@@ -19,8 +19,38 @@
                             <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
                         </h:outputText>
                         <h:outputText value="#{bundle.ViewFacturaLabel_clienteidCliente}"/>
-                        <h:outputText value="#{facturaController.selected.clienteidCliente}" title="#{bundle.ViewFacturaTitle_clienteidCliente}"/>
+                        <h:outputText value="#{facturaController.selected.clienteidCliente.idCliente} - #{facturaController.selected.clienteidCliente.nombre}" title="#{bundle.ViewFacturaTitle_clienteidCliente}"/>
                     </p:panelGrid>
+                    <p:dataTable id="productsTable" var="product" value="#{facturaController.productos}" rowKey="#{product.idProducto}"
+                                 selectionMode="single" style="width: 539px">
+                        <f:facet name="header">
+                            Productos
+                        </f:facet>
+
+                        <p:column headerText="Codigo">
+                            <h:outputText value="#{product.idProducto}" />
+                        </p:column>
+                        <p:column headerText="Descripcion">
+                            <h:outputText value="#{product.descripcion}" />
+                        </p:column>
+                        <p:column headerText="Cantidad">
+                            <h:outputText value="#{product.cantidad}" />
+                        </p:column>
+                        <p:column headerText="Valor">
+                            <h:outputText value="#{product.valor}" />
+                        </p:column>
+                        <p:column headerText="Total">
+                            <h:outputText value="#{product.cantidad*product.valor}" />
+                        </p:column>
+                        <p:columnGroup type="footer">
+                            <p:row>
+                                <p:column colspan="2" style="text-align:right" footerText="Totales:"/>
+                                <p:column style="text-align:left" footerText="#{facturaController.totalUnidades}"/>
+                                <p:column style="text-align:left" footerText="-"/>
+                                <p:column style="text-align:left" footerText="$#{facturaController.valorTotal}"/>
+                            </p:row>
+                        </p:columnGroup>
+                    </p:dataTable>
                     <p:commandButton value="#{bundle.Close}" onclick="FacturaViewDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
