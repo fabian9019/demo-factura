@@ -1,4 +1,4 @@
-package controllers.util;
+package com.mycompany.prueba2.utilities;
 
 import java.util.List;
 import javax.faces.application.FacesMessage;

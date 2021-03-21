@@ -1,8 +1,8 @@
 package com.mycompany.prueba2.controllers;
 
 import com.mycompany.prueba2.entities.Producto;
-import controllers.util.JsfUtil;
-import controllers.util.JsfUtil.PersistAction;
+import com.mycompany.prueba2.utilities.JsfUtil;
+import com.mycompany.prueba2.utilities.JsfUtil.PersistAction;
 import com.mycompany.prueba2.daos.ProductoDao;
 
 import java.io.Serializable;
