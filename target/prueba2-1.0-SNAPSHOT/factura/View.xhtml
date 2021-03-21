@@ -14,43 +14,15 @@
                     <p:panelGrid columns="2" rendered="#{facturaController.selected != null}">
                         <h:outputText value="#{bundle.ViewFacturaLabel_idFactura}"/>
                         <h:outputText value="#{facturaController.selected.idFactura}" title="#{bundle.ViewFacturaTitle_idFactura}"/>
-                        <h:outputText value="#{bundle.ViewFacturaLabel_fechaCreacion}"/>
-                        <h:outputText value="#{facturaController.selected.fechaCreacion}" title="#{bundle.ViewFacturaTitle_fechaCreacion}">
+                        <h:outputText value="#{bundle.ViewFacturaLabel_fechaVenta}"/>
+                        <h:outputText value="#{facturaController.selected.fechaVenta}" title="#{bundle.ViewFacturaTitle_fechaVenta}">
                             <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
                         </h:outputText>
-                        <h:outputText value="#{bundle.ViewFacturaLabel_clienteidCliente}"/>
-                        <h:outputText value="#{facturaController.selected.clienteidCliente.idCliente} - #{facturaController.selected.clienteidCliente.nombre}" title="#{bundle.ViewFacturaTitle_clienteidCliente}"/>
+                        <h:outputText value="#{bundle.ViewFacturaLabel_valorTotal}"/>
+                        <h:outputText value="#{facturaController.selected.valorTotal}" title="#{bundle.ViewFacturaTitle_valorTotal}"/>
+                        <h:outputText value="#{bundle.ViewFacturaLabel_idCliente}"/>
+                        <h:outputText value="#{facturaController.selected.idCliente}" title="#{bundle.ViewFacturaTitle_idCliente}"/>
                     </p:panelGrid>
-                    <p:dataTable id="productsTable" var="product" value="#{facturaController.productos}" rowKey="#{product.idProducto}"
-                                 selectionMode="single" style="width: 539px">
-                        <f:facet name="header">
-                            Productos
-                        </f:facet>
-
-                        <p:column headerText="Codigo">
-                            <h:outputText value="#{product.idProducto}" />
-                        </p:column>
-                        <p:column headerText="Descripcion">
-                            <h:outputText value="#{product.descripcion}" />
-                        </p:column>
-                        <p:column headerText="Cantidad">
-                            <h:outputText value="#{product.cantidad}" />
-                        </p:column>
-                        <p:column headerText="Valor">
-                            <h:outputText value="#{product.valor}" />
-                        </p:column>
-                        <p:column headerText="Total">
-                            <h:outputText value="#{product.cantidad*product.valor}" />
-                        </p:column>
-                        <p:columnGroup type="footer">
-                            <p:row>
-                                <p:column colspan="2" style="text-align:right" footerText="Totales:"/>
-                                <p:column style="text-align:left" footerText="#{facturaController.totalUnidades}"/>
-                                <p:column style="text-align:left" footerText="-"/>
-                                <p:column style="text-align:left" footerText="$#{facturaController.valorTotal}"/>
-                            </p:row>
-                        </p:columnGroup>
-                    </p:dataTable>
                     <p:commandButton value="#{bundle.Close}" onclick="FacturaViewDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

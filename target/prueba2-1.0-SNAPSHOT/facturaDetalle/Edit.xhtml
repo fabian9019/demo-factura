@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="FacturaDetalleEditDlg" widgetVar="FacturaDetalleEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditFacturaDetalleTitle}">
+            <h:form id="FacturaDetalleEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{facturaDetalleController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditFacturaDetalleLabel_idFacturaDetalle}" for="idFacturaDetalle" />
+                        <p:inputText id="idFacturaDetalle" value="#{facturaDetalleController.selected.idFacturaDetalle}" title="#{bundle.EditFacturaDetalleTitle_idFacturaDetalle}" required="true" requiredMessage="#{bundle.EditFacturaDetalleRequiredMessage_idFacturaDetalle}"/>
+                        <p:outputLabel value="#{bundle.EditFacturaDetalleLabel_cantidad}" for="cantidad" />
+                        <p:inputText id="cantidad" value="#{facturaDetalleController.selected.cantidad}" title="#{bundle.EditFacturaDetalleTitle_cantidad}" required="true" requiredMessage="#{bundle.EditFacturaDetalleRequiredMessage_cantidad}"/>
+                        <p:outputLabel value="#{bundle.EditFacturaDetalleLabel_valorUnidad}" for="valorUnidad" />
+                        <p:inputText id="valorUnidad" value="#{facturaDetalleController.selected.valorUnidad}" title="#{bundle.EditFacturaDetalleTitle_valorUnidad}" required="true" requiredMessage="#{bundle.EditFacturaDetalleRequiredMessage_valorUnidad}"/>
+                        <p:outputLabel value="#{bundle.EditFacturaDetalleLabel_valorTotal}" for="valorTotal" />
+                        <p:inputText id="valorTotal" value="#{facturaDetalleController.selected.valorTotal}" title="#{bundle.EditFacturaDetalleTitle_valorTotal}" required="true" requiredMessage="#{bundle.EditFacturaDetalleRequiredMessage_valorTotal}"/>
+                        <p:outputLabel value="#{bundle.EditFacturaDetalleLabel_idFactura}" for="idFactura" />
+                        <p:selectOneMenu id="idFactura" value="#{facturaDetalleController.selected.idFactura}" required="true" requiredMessage="#{bundle.EditFacturaDetalleRequiredMessage_idFactura}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{facturaController.itemsAvailableSelectOne}"
+                                           var="idFacturaItem"
+                                           itemValue="#{idFacturaItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditFacturaDetalleLabel_idProducto}" for="idProducto" />
+                        <p:selectOneMenu id="idProducto" value="#{facturaDetalleController.selected.idProducto}" required="true" requiredMessage="#{bundle.EditFacturaDetalleRequiredMessage_idProducto}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{productoController.itemsAvailableSelectOne}"
+                                           var="idProductoItem"
+                                           itemValue="#{idProductoItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{facturaDetalleController.update}" value="#{bundle.Save}" update="display,:FacturaDetalleListForm:datalist,:growl" oncomplete="handleSubmit(args, 'FacturaDetalleEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="FacturaDetalleEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

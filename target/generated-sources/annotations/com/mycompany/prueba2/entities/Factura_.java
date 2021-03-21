@@ -10,15 +10,17 @@ import javax.persistence.metamodel.StaticMetamodel;
 @StaticMetamodel(Factura.class)
 public abstract class Factura_ {
 
+	public static volatile SingularAttribute<Factura, Cliente> idCliente;
 	public static volatile SingularAttribute<Factura, Integer> idFactura;
-	public static volatile SingularAttribute<Factura, Cliente> clienteidCliente;
-	public static volatile SingularAttribute<Factura, Date> fechaCreacion;
-	public static volatile ListAttribute<Factura, FacturahasProducto> facturahasProductoList;
+	public static volatile SingularAttribute<Factura, Double> valorTotal;
+	public static volatile ListAttribute<Factura, FacturaDetalle> facturaDetalleList;
+	public static volatile SingularAttribute<Factura, Date> fechaVenta;
 
+	public static final String ID_CLIENTE = "idCliente";
 	public static final String ID_FACTURA = "idFactura";
-	public static final String CLIENTEID_CLIENTE = "clienteidCliente";
-	public static final String FECHA_CREACION = "fechaCreacion";
-	public static final String FACTURAHAS_PRODUCTO_LIST = "facturahasProductoList";
+	public static final String VALOR_TOTAL = "valorTotal";
+	public static final String FACTURA_DETALLE_LIST = "facturaDetalleList";
+	public static final String FECHA_VENTA = "fechaVenta";
 
 }
 

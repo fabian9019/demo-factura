@@ -14,12 +14,14 @@
                     <p:panelGrid columns="2" rendered="#{productoController.selected != null}">
                         <h:outputText value="#{bundle.ViewProductoLabel_idProducto}"/>
                         <h:outputText value="#{productoController.selected.idProducto}" title="#{bundle.ViewProductoTitle_idProducto}"/>
-                        <h:outputText value="#{bundle.ViewProductoLabel_descripcion}"/>
-                        <h:outputText value="#{productoController.selected.descripcion}" title="#{bundle.ViewProductoTitle_descripcion}"/>
-                        <h:outputText value="#{bundle.ViewProductoLabel_cantidad}"/>
-                        <h:outputText value="#{productoController.selected.cantidad}" title="#{bundle.ViewProductoTitle_cantidad}"/>
-                        <h:outputText value="#{bundle.ViewProductoLabel_valor}"/>
-                        <h:outputText value="#{productoController.selected.valor}" title="#{bundle.ViewProductoTitle_valor}"/>
+                        <h:outputText value="#{bundle.ViewProductoLabel_codigo}"/>
+                        <h:outputText value="#{productoController.selected.codigo}" title="#{bundle.ViewProductoTitle_codigo}"/>
+                        <h:outputText value="#{bundle.ViewProductoLabel_nombre}"/>
+                        <h:outputText value="#{productoController.selected.nombre}" title="#{bundle.ViewProductoTitle_nombre}"/>
+                        <h:outputText value="#{bundle.ViewProductoLabel_valorUnidad}"/>
+                        <h:outputText value="#{productoController.selected.valorUnidad}" title="#{bundle.ViewProductoTitle_valorUnidad}"/>
+                        <h:outputText value="#{bundle.ViewProductoLabel_stock}"/>
+                        <h:outputText value="#{productoController.selected.stock}" title="#{bundle.ViewProductoTitle_stock}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="ProductoViewDialog.hide()"/>
                 </h:panelGroup>

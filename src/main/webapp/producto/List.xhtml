@@ -35,21 +35,27 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListProductoTitle_descripcion}"/>
+                                <h:outputText value="#{bundle.ListProductoTitle_codigo}"/>
                             </f:facet>
-                            <h:outputText value="#{item.descripcion}"/>
+                            <h:outputText value="#{item.codigo}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListProductoTitle_cantidad}"/>
+                                <h:outputText value="#{bundle.ListProductoTitle_nombre}"/>
                             </f:facet>
-                            <h:outputText value="#{item.cantidad}"/>
+                            <h:outputText value="#{item.nombre}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListProductoTitle_valor}"/>
+                                <h:outputText value="#{bundle.ListProductoTitle_valorUnidad}"/>
                             </f:facet>
-                            <h:outputText value="#{item.valor}"/>
+                            <h:outputText value="#{item.valorUnidad}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListProductoTitle_stock}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.stock}"/>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{productoController.prepareCreate}" update=":ProductoCreateForm" oncomplete="PF('ProductoCreateDialog').show()"/>
